@@ -1,0 +1,92 @@
+EPI_data <- read.csv("2010EPI_data.csv", skip = 1)
+GRUMP_data <- read.csv("GPW3_GRUMP_SummaryInformation_2010.csv")
+
+View(EPI_data)
+attach(EPI_data)
+fix(EPI_data)
+EPI                    #Prints out Values EPI_dat$EPI
+tf <- is.na(EPI)       #Records True for NA
+E <- EPI[!tf]          #Filters out NA
+
+#Exercise 1
+summary(EPI)
+
+fivenum(EPI,na.rm=TRUE)
+
+stem(EPI)
+hist(EPI)
+hist(EPI, seq(30., 95., 1.0), prob=TRUE)
+help(lines)
+lines(density(EPI,na.rm=TRUE,bw="SJ"))
+help(rug)
+rug(EPI)
+
+plot(ecdf(EPI), do.points=FALSE, verticals=TRUE)
+par(pty="s")
+qqnorm(EPI); qqline(EPI)
+
+x <- rt(250, df = 5)
+qqnorm(x); qqline(x)
+
+qqplot(qt(ppoints(250), df = 5), x, xlab = "Q-Q plot for tdsn")
+qqline(x)
+
+plot(ecdf(DALY), do.points=FALSE, verticals=TRUE)
+par(pty="s")
+qqnorm(DALY); qqline(DALY)
+
+plot(ecdf(ENVHEALTH), do.points=FALSE, verticals=TRUE)
+par(pty="s")
+qqnorm(ENVHEALTH); qqline(ENVHEALTH)
+
+boxplot(EPI,DALY)
+qqplot(EPI,DALY)
+
+boxplot(EPI,ENVHEALTH)
+qqplot(EPI,ENVHEALTH)
+
+help(distributions)
+dnorm(EPI, mean = 58.37, sd = 1, log = FALSE)
+
+#Exercise 2
+EPILand<-EPI[!Landlock]
+Eland <- EPILand[!is.na(EPILand)]
+EPIDesert<-EPI[!Desert]
+hist(ELand)
+hist(EPIDesert)
+hist(ELand, seq(30., 95., 1.0), prob=TRUE)
+EPI_South_Asia <- EPI[EPI_regions == "South Asia"]
+
+#Exercise 3
+View(GRUMP_data)
+attach(GRUMP_data)
+fix(GRUMP_data)
+tfg <- is.na(GRUMP_data)       
+G <- GRUMP_data[!tfg]          
+summary(GRUMP_data)
+summary(G)
+
+fivenum(EPI,na.rm=TRUE)
+
+stem(Continent)
+hist(Continent)
+hist(Continent, seq(1,2,6), prob=TRUE)  #Trying different widths
+hist(Continent)
+lines(density(Continent,na.rm=TRUE,bw="SJ"))
+rug(Continent)
+
+plot(ecdf(Continent), do.points=FALSE, verticals=TRUE) 
+par(pty="s") 
+qqnorm(Continent); qqline(Continent)
+help(rt)
+x <- rt(25, df = 10)
+qqnorm(x); qqline(x)
+
+boxplot(Continent, Population07)
+boxplot(Continent, UNRegion)
+qqplot(Continent, UNRegion)
+
+Level <- G[!LevelUsed]
+hist(Level)
+summary(UNRegion)
+       
